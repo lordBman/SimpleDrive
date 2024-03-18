@@ -1,8 +1,9 @@
 package com.bsoft.simpledrive.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bsoft.simpledrive.models.User;
+import com.bsoft.simpledrive.models.users.User;
 import com.bsoft.simpledrive.services.UserService;
 
 import java.util.UUID;
@@ -26,10 +27,8 @@ public class UsersController {
     UserService userService;
 
     @PostMapping("/users")
-    public ResponseEntity<User> create(@RequestBody SignUpForm form) {
-        String id = UUID.randomUUID().toString();
-
-        User user = new User( id, form.name(), form.surname(), form.email(), form.password());
+    public ResponseEntity<User> create(@RequestBody @Valid SignUpForm form) {
+        User user = new User( form.name(), form.surname(), form.email(), form.password());
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Set-Cookie", "token=wellItWorks");
@@ -38,7 +37,7 @@ public class UsersController {
     }
 
     @PostMapping("/users/login")
-    public ResponseEntity<User> login(@RequestBody LoginForm form) {
+    public ResponseEntity<User> login(@RequestBody @Valid LoginForm form) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Set-Cookie", "token=wellItWorks");
 
