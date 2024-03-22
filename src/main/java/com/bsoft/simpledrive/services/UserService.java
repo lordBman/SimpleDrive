@@ -1,13 +1,20 @@
 package com.bsoft.simpledrive.services;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
-import com.bsoft.simpledrive.models.users.User;
+import com.bsoft.simpledrive.models.User;
+import com.bsoft.simpledrive.repository.UserRepository;
 
 public class UserService {
-    HashMap<String, User> users;
+    private final UserRepository userRepository;
+    UserService(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
 
-    UserService(){
-        this.users = new HashMap<>();
+    public ArrayList<User> all(){
+        return (ArrayList<User>) this.userRepository.findAll();
     }
 }

@@ -1,4 +1,4 @@
-package com.bsoft.simpledrive.models.users;
+package com.bsoft.simpledrive.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
